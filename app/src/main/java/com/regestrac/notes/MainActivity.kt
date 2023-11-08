@@ -20,23 +20,24 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.regestrac.notes.Adapter.NotesAdapter
 import com.regestrac.notes.Database.NoteDatabase
 import com.regestrac.notes.databinding.ActivityMainBinding
-import java.io.Serializable
 
-class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, PopupMenu.OnMenuItemClickListener {
+class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener,
+    PopupMenu.OnMenuItemClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var database: NoteDatabase
     lateinit var viewModal: NoteViewModal
     lateinit var adapter: NotesAdapter
     lateinit var selectedNote: Note
 
-    private val updateNote = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val note = result.data?.getSerializableExtra("note") as? Note
-            if (note != null) {
-                viewModal.updateNote(note)
+    private val updateNote =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val note = result.data?.getSerializableExtra("note") as? Note
+                if (note != null) {
+                    viewModal.updateNote(note)
+                }
             }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,17 +47,18 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         // For initialising the UI
         initUI()
 
-        viewModal = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModal::class.java)
+        viewModal = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(NoteViewModal::class.java)
 
-        viewModal.allnotes.observe(this) {list ->
+        viewModal.allnotes.observe(this) { list ->
             list?.let {
                 adapter.updateList(list)
             }
         }
 
         database = NoteDatabase.getDatabase(this)
-
     }
 
     private fun initUI() {
@@ -65,14 +67,15 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
         adapter = NotesAdapter(this, this)
         binding.recyclerView.adapter = adapter
 
-        val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val note = result.data?.getSerializableExtra("note") as? Note
-                if (note != null) {
-                    viewModal.insertNote(note)
+        val getContent =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val note = result.data?.getSerializableExtra("note") as? Note
+                    if (note != null) {
+                        viewModal.insertNote(note)
+                    }
                 }
             }
-        }
 
         binding.fbAddNote.setOnClickListener() {
             val intent = Intent(this, AddNoteActivity::class.java)
@@ -88,9 +91,8 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
                 if (newText != null) {
                     adapter.filterList(newText)
                 }
-                    return true
+                return true
             }
-
         })
     }
 
@@ -103,14 +105,14 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener, Popup
     override fun onLongItemClicked(note: Note, cardView: CardView) {
         selectedNote = note
         popUpDisplay(cardView)
-
     }
-        private fun popUpDisplay(cardView: CardView) {
-            val popup = PopupMenu(this, cardView)
-            popup.setOnMenuItemClickListener(this@MainActivity)
-            popup.inflate(R.menu.pop_up_menu)
-            popup.show()
-        }
+
+    private fun popUpDisplay(cardView: CardView) {
+        val popup = PopupMenu(this, cardView)
+        popup.setOnMenuItemClickListener(this@MainActivity)
+        popup.inflate(R.menu.pop_up_menu)
+        popup.show()
+    }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.delete_note) {

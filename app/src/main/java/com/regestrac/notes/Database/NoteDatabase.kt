@@ -8,14 +8,15 @@ import com.regestrac.notes.Modals.Note
 import com.regestrac.notes.Utilities.DATABASE_NAME
 
 @Database(entities = arrayOf(Note::class), version = 1, exportSchema = false)
-abstract class NoteDatabase: RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase() {
     abstract fun getNoteDao(): NoteDao
-    companion object{
+
+    companion object {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
 
-        fun getDatabase(context: Context): NoteDatabase{
-            return INSTANCE ?: synchronized(this){
+        fun getDatabase(context: Context): NoteDatabase {
+            return INSTANCE ?: synchronized(this) {
 
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

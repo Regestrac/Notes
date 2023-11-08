@@ -11,14 +11,15 @@ import com.regestrac.notes.Modals.Note
 import com.regestrac.notes.R
 import kotlin.random.Random
 
-class NotesAdapter(private val context: Context, val listener: NotesClickListener): RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(private val context: Context, val listener: NotesClickListener) :
+    RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val notesList = ArrayList<Note>()
     private val fullList = ArrayList<Note>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.list_item,parent,false)
+            LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         )
     }
 
@@ -32,7 +33,12 @@ class NotesAdapter(private val context: Context, val listener: NotesClickListene
         holder.title.isSelected = true
         holder.date.isSelected = true
 
-        holder.notes_layout.setCardBackgroundColor(holder.itemView.resources.getColor(randomColor(), null ))
+        holder.notes_layout.setCardBackgroundColor(
+            holder.itemView.resources.getColor(
+                randomColor(),
+                null
+            )
+        )
 
         holder.notes_layout.setOnClickListener {
             listener.onItemClicked(notesList[holder.adapterPosition])
@@ -58,12 +64,13 @@ class NotesAdapter(private val context: Context, val listener: NotesClickListene
         notifyDataSetChanged()
     }
 
-    fun filterList(search: String){
+    fun filterList(search: String) {
         notesList.clear()
 
-        for (item in fullList){
+        for (item in fullList) {
             if (item.title?.lowercase()?.contains(search.lowercase()) == true ||
-            item.note?.lowercase()?.contains(search.lowercase()) == true){
+                item.note?.lowercase()?.contains(search.lowercase()) == true
+            ) {
                 notesList.add(item)
             }
         }
@@ -86,14 +93,14 @@ class NotesAdapter(private val context: Context, val listener: NotesClickListene
         return list[randomIndex]
     }
 
-    inner class NoteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notes_layout = itemView.findViewById<CardView>(R.id.card_layout)
         val title = itemView.findViewById<TextView>(R.id.tv_title)
         val note_tv = itemView.findViewById<TextView>(R.id.tv_note)
         val date = itemView.findViewById<TextView>(R.id.tv_date)
     }
 
-    interface NotesClickListener{
+    interface NotesClickListener {
         fun onItemClicked(note: Note)
         fun onLongItemClicked(note: Note, cardView: CardView)
     }

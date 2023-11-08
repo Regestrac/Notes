@@ -9,7 +9,7 @@ import com.regestrac.notes.Database.NotesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteViewModal(application: Application): AndroidViewModel(application) {
+class NoteViewModal(application: Application) : AndroidViewModel(application) {
     private val repository: NotesRepository
 
     val allnotes: LiveData<List<Note>>
