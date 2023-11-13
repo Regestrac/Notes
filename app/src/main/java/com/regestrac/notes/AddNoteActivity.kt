@@ -40,15 +40,16 @@ class AddNoteActivity : AppCompatActivity() {
             if (title.isNotEmpty() || noteDescription.isNotEmpty()) {
                 val formatter = SimpleDateFormat("EEE, d MMM yyyy HH:mm a")
 
-                if (isUpdate) {
-                    note = Note(oldNote.id, title, noteDescription, formatter.format(Date()))
+                note = if (isUpdate) {
+                    Note(oldNote.id, title, noteDescription, formatter.format(Date()))
                 } else {
-                    note = Note(null, title, noteDescription, formatter.format(Date()))
+                    Note(null, title, noteDescription, formatter.format(Date()))
                 }
 
                 val intent = Intent()
                 intent.putExtra("note", note)
                 setResult(Activity.RESULT_OK, intent)
+                onBackPressed()
             } else {
                 Toast.makeText(this@AddNoteActivity, "Please enter some data", Toast.LENGTH_SHORT)
                     .show()
