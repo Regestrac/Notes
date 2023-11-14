@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(NoteViewModal::class.java)
 
-        viewModal.allnotes.observe(this) { list ->
+        viewModal.allNotes.observe(this) { list ->
             list?.let {
                 adapter.updateList(list)
             }
