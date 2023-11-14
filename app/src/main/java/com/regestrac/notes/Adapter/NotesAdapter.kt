@@ -11,7 +11,7 @@ import com.regestrac.notes.Modals.Note
 import com.regestrac.notes.R
 import kotlin.random.Random
 
-class NotesAdapter(private val context: Context, val listener: NotesClickListener) :
+class NotesAdapter(private val context: Context, private val listener: NotesClickListener) :
     RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     private val notesList = ArrayList<Note>()
@@ -27,25 +27,25 @@ class NotesAdapter(private val context: Context, val listener: NotesClickListene
         val currentNote = notesList[position]
 
         holder.title.text = currentNote.title
-        holder.note_tv.text = currentNote.note
+        holder.noteTv.text = currentNote.note
         holder.date.text = currentNote.date
 
         holder.title.isSelected = true
         holder.date.isSelected = true
 
-        holder.notes_layout.setCardBackgroundColor(
+        holder.notesLayout.setCardBackgroundColor(
             holder.itemView.resources.getColor(
                 randomColor(),
                 null
             )
         )
 
-        holder.notes_layout.setOnClickListener {
+        holder.notesLayout.setOnClickListener {
             listener.onItemClicked(notesList[holder.adapterPosition])
         }
 
-        holder.notes_layout.setOnLongClickListener {
-            listener.onLongItemClicked(notesList[holder.adapterPosition], holder.notes_layout)
+        holder.notesLayout.setOnLongClickListener {
+            listener.onLongItemClicked(notesList[holder.adapterPosition], holder.notesLayout)
             true
         }
     }
@@ -94,10 +94,10 @@ class NotesAdapter(private val context: Context, val listener: NotesClickListene
     }
 
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val notes_layout = itemView.findViewById<CardView>(R.id.card_layout)
-        val title = itemView.findViewById<TextView>(R.id.tv_title)
-        val note_tv = itemView.findViewById<TextView>(R.id.tv_note)
-        val date = itemView.findViewById<TextView>(R.id.tv_date)
+        val notesLayout: CardView = itemView.findViewById(R.id.card_layout)
+        val title: TextView = itemView.findViewById(R.id.tv_title)
+        val noteTv: TextView = itemView.findViewById(R.id.tv_note)
+        val date: TextView = itemView.findViewById(R.id.tv_date)
     }
 
     interface NotesClickListener {

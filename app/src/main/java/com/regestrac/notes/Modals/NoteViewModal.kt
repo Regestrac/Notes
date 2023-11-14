@@ -12,12 +12,12 @@ import kotlinx.coroutines.launch
 class NoteViewModal(application: Application) : AndroidViewModel(application) {
     private val repository: NotesRepository
 
-    val allnotes: LiveData<List<Note>>
+    val allNotes: LiveData<List<Note>>
 
     init {
         val dao = NoteDatabase.getDatabase(application).getNoteDao()
         repository = NotesRepository(dao)
-        allnotes = repository.allNotes
+        allNotes = repository.allNotes
     }
 
     fun deleteNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {

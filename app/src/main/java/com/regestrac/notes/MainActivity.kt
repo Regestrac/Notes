@@ -2,7 +2,6 @@ package com.regestrac.notes
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,9 +9,7 @@ import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
-import androidx.lifecycle.ViewModel
 import com.regestrac.notes.Modals.Note
 import com.regestrac.notes.Modals.NoteViewModal
 import androidx.lifecycle.ViewModelProvider
@@ -25,9 +22,9 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener,
     PopupMenu.OnMenuItemClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var database: NoteDatabase
-    lateinit var viewModal: NoteViewModal
+    private lateinit var viewModal: NoteViewModal
     lateinit var adapter: NotesAdapter
-    lateinit var selectedNote: Note
+    private lateinit var selectedNote: Note
 
     private val updateNote =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -52,7 +49,7 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(NoteViewModal::class.java)
 
-        viewModal.allnotes.observe(this) { list ->
+        viewModal.allNotes.observe(this) { list ->
             list?.let {
                 adapter.updateList(list)
             }
@@ -77,7 +74,7 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener,
                 }
             }
 
-        binding.fbAddNote.setOnClickListener() {
+        binding.fbAddNote.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
             getContent.launch(intent)
         }
