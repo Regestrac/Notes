@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.regestrac.notes.Modals.Note
 import com.regestrac.notes.Utilities.DATABASE_NAME
 
@@ -29,5 +31,6 @@ abstract class NoteDatabase : RoomDatabase() {
                 instance
             }
         }
+
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.regestrac.notes.Modals.Note
 import com.regestrac.notes.R
@@ -26,6 +27,16 @@ class NotesAdapter(private val context: Context, private val listener: NotesClic
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote = notesList[position]
 
+        val colorMap: Map<String, Int> = mapOf(
+            "Red" to R.color.NoteColor1,
+            "Blue" to R.color.NoteColor2,
+            "Green" to R.color.NoteColor3,
+            "Yellow" to R.color.NoteColor4,
+            "Dark blue" to R.color.NoteColor5,
+            "Pink" to R.color.NoteColor6,
+            "Purple" to R.color.NoteColor7,
+        )
+
         holder.title.text = currentNote.title
         holder.noteTv.text = currentNote.note
         holder.date.text = currentNote.date
@@ -33,12 +44,10 @@ class NotesAdapter(private val context: Context, private val listener: NotesClic
         holder.title.isSelected = true
         holder.date.isSelected = true
 
-        holder.notesLayout.setCardBackgroundColor(
-            holder.itemView.resources.getColor(
-                randomColor(),
-                null
-            )
-        )
+        val selectedColor = colorMap[currentNote.bgColor]?.let { ContextCompat.getColor(context, it) }
+        if (selectedColor != null) {
+            holder.notesLayout.setCardBackgroundColor(selectedColor)
+        }
 
         holder.notesLayout.setOnClickListener {
             listener.onItemClicked(notesList[holder.adapterPosition])
@@ -76,21 +85,6 @@ class NotesAdapter(private val context: Context, private val listener: NotesClic
         }
 
         notifyDataSetChanged()
-    }
-
-    private fun randomColor(): Int {
-        val list = ArrayList<Int>()
-        list.add(R.color.NoteColor1)
-        list.add(R.color.NoteColor2)
-        list.add(R.color.NoteColor3)
-        list.add(R.color.NoteColor4)
-        list.add(R.color.NoteColor5)
-        list.add(R.color.NoteColor6)
-        list.add(R.color.NoteColor7)
-
-        val seed = System.currentTimeMillis().toInt()
-        val randomIndex = Random(seed).nextInt(list.size)
-        return list[randomIndex]
     }
 
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
