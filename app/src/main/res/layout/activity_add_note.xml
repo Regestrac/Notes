@@ -4,44 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNoteActivity">
+    tools:context=".AddNoteActivity"
+    android:background="@color/black">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/black"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/et_title"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/img_back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:importantForAccessibility="no"
-            android:padding="10dp"
+            android:layout_margin="18dp"
             app:srcCompat="@drawable/baseline_arrow_back_24" />
 
         <ImageView
             android:id="@+id/img_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="18dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="12dp"
             android:importantForAccessibility="no"
-            android:padding="10dp"
+            android:padding="0dp"
             app:srcCompat="@drawable/baseline_check_24" />
 
     </RelativeLayout>
@@ -50,46 +55,55 @@
         android:id="@+id/et_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:ems="10"
         android:hint="@string/title"
         android:importantForAutofill="no"
         android:inputType="text"
         android:padding="12dp"
         android:textSize="26sp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/select_color" />
 
     <TextView
         android:id="@+id/select_color"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginStart="280dp"
+        android:background="@drawable/search_background"
         android:gravity="end"
-        android:text="@string/select_color"
-        android:textColor="@color/black"
-        android:paddingEnd="18dp"
-        android:paddingStart="0dp"
+        android:padding="6dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="@string/black"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/et_note"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toBottomOf="@+id/et_title" />
 
     <EditText
         android:id="@+id/et_note"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="26dp"
         android:padding="12dp"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/start_writing"
         android:lineSpacingMultiplier="1.8"
         android:inputType="textMultiLine"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_title"
         app:layout_constraintStart_toStartOf="@+id/et_title"
-        app:layout_constraintTop_toBottomOf="@+id/et_title"
+        app:layout_constraintTop_toBottomOf="@+id/select_color"
         android:importantForAutofill="no" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

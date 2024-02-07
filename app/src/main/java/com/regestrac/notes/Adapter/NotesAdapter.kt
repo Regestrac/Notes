@@ -28,11 +28,12 @@ class NotesAdapter(private val context: Context, private val listener: NotesClic
         val currentNote = notesList[position]
 
         val colorMap: Map<String, Int> = mapOf(
+            "Black" to R.color.noteListDefaultColor,
             "Red" to R.color.NoteColor1,
-            "Blue" to R.color.NoteColor2,
+            "Cyan" to R.color.NoteColor2,
             "Green" to R.color.NoteColor3,
             "Yellow" to R.color.NoteColor4,
-            "Dark blue" to R.color.NoteColor5,
+            "Blue" to R.color.NoteColor5,
             "Pink" to R.color.NoteColor6,
             "Purple" to R.color.NoteColor7,
         )
@@ -45,8 +46,13 @@ class NotesAdapter(private val context: Context, private val listener: NotesClic
         holder.date.isSelected = true
 
         val selectedColor = colorMap[currentNote.bgColor]?.let { ContextCompat.getColor(context, it) }
-        if (selectedColor != null) {
+        if (selectedColor != null && currentNote.bgColor != "Black") {
             holder.notesLayout.setCardBackgroundColor(selectedColor)
+        } else {
+            holder.notesLayout.setCardBackgroundColor(ContextCompat.getColor(context, R.color.noteListDefaultColor))
+            holder.title.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.noteTv.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.date.setTextColor(ContextCompat.getColor(context, R.color.white))
         }
 
         holder.notesLayout.setOnClickListener {
