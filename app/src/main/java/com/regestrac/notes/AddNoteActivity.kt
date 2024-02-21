@@ -78,7 +78,6 @@ class AddNoteActivity : AppCompatActivity() {
                 val intent = Intent()
                 intent.putExtra("note", note)
                 setResult(Activity.RESULT_OK, intent)
-                super.onBackPressed()
             } else {
                 Toast.makeText(this@AddNoteActivity, "Please enter some data", Toast.LENGTH_SHORT)
                     .show()
