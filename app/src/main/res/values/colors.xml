@@ -3,12 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#4A4F51</color>
+    <color name="noteListDefaultColor">#323232</color>
 
-    <color name="NoteColor1">#FF6263</color>
-    <color name="NoteColor2">#23CFED</color>
-    <color name="NoteColor3">#38CC77</color>
-    <color name="NoteColor4">#D9D55B</color>
-    <color name="NoteColor5">#318BD1</color>
-    <color name="NoteColor6">#E867E5</color>
-    <color name="NoteColor7">#AB25E4</color>
+    <color name="NoteColor1">#FF9A93</color>
+    <color name="NoteColor2">#80DAE3</color>
+    <color name="NoteColor3">#B1EBA4</color>
+    <color name="NoteColor4">#E0D287</color>
+    <color name="NoteColor5">#8EA1E7</color>
+    <color name="NoteColor6">#E390BD</color>
+    <color name="NoteColor7">#DFAEFF</color>
 </resources>
