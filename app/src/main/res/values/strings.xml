@@ -4,4 +4,7 @@
     <string name="start_writing">Start writing...</string>
     <string name="note">Note</string>
     <string name="date">Date</string>
+    <string name="select_color">Select Color</string>
+    <string name="notes">Notes</string>
+    <string name="black">Black</string>
 </resources>

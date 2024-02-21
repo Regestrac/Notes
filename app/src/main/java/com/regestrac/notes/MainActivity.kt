@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), NotesAdapter.NotesClickListener,
         viewModal = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(NoteViewModal::class.java)
+        )[NoteViewModal::class.java]
 
         viewModal.allNotes.observe(this) { list ->
             list?.let {
